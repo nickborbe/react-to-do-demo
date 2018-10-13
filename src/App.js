@@ -4,6 +4,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import Auth from './Auth';
+import TaskList from './TaskList'
 
 class App extends Component {
   constructor(props){
@@ -52,20 +53,22 @@ class App extends Component {
 
     return (
       <div className="App">
+      {this.state.loggedInUser && <button onClick={this.logout}> Logout</button>}
       <Link to={"/auth"}> Login/Signup </Link>
+      <Link to={"/tasks"}> List Of Tasks </Link>
       <h3>
          {this.state.loggedInUser && 'Welcome, ' + this.state.loggedInUser.username}
       </h3>
 
       <Switch>
         <Route path="/auth" render = {props => <Auth {...props}  passTheUserToApp = {this.setUserInState}/>}/>
+        <Route path="/tasks" component = {TaskList} />
       </Switch>
 
 
   
 
 
-      {this.state.loggedInUser && <button onClick={this.logout}> Logout</button>}
 
       
 
